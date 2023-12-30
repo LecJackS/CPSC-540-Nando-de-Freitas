@@ -11,10 +11,17 @@ f = lambda x: np.sin(0.9*x).flatten()
 
 
 # Define the kernel
-def kernel(a, b):
+def kernel1(a, b):
     """ GP squared exponential kernel """
     kernelParameter = 0.1
     sqdist = np.sum(a**2,1).reshape(-1,1) + np.sum(b**2,1) - 2*np.dot(a, b.T)
+    return np.exp(-.5 * (1/kernelParameter) * sqdist)
+
+# Define the kernel
+def kernel(a, b):
+    """ GP squared exponential kernel """
+    kernelParameter = 0.1
+    sqdist = 0
     return np.exp(-.5 * (1/kernelParameter) * sqdist)
 
 N = 10         # number of training points.
